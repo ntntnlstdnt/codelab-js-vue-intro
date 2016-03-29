@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>VUE JS</title>
+  </head>
+  <body>
+    <div id="app">
+      <p> Talk to a Chat Bot </p>
+      <input type="text" v-model="userInput" v-on:keyup.enter="setResponse">
+      <p v-if="response"> {{ response }} </p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          userInput: '',
+          responseDictionary: {
+            'hi': 'Greetings, Human!',
+            'hello': 'Greetings, Human!',
+            'how are you?': 'I came into being through the excellent ' +
+            'programming of my creator!',
+            'so where are you from?': 'none ya...',
+            'I need some advice':'Me too!',
+            'Run, Forest, run!': 'I have no legs... :/'
+          },
+          response: '',
+          randomResponse: [
+            'Very interesting!',
+            'Really??',
+            'Tell me more',
+            'No way!'
+          ]
+        },
+        methods: {
+          setResponse: function () {
+            var input = this.userInput.toLowerCase()
+            this.response = this.responseDictionary[input]
+            if (this.response === undefined){
+              var index = Math.floor(this.randomResponse.length * Math.random())
+              this.response = this.randomResponse[index]
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
